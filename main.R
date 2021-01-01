@@ -2,7 +2,7 @@ autos1 <- read.csv('autos.csv')
 boxplot(autos1)
 summary(autos1)
 autos <- read.table('autos.csv',header=FALSE, sep=",")
-#retrancher moyenne et diviser par écrart type
+plot(autos1)
 #puissance
 puissance<-(autos1[2])
 #moyenne
@@ -84,12 +84,12 @@ sqrt(var(cons))
 nvelleCons <- as.vector((cons-(sum(cons)/nrow(cons)))/sqrt(var(cons)))
 nvelleCons
 
-#tableau de correlation
-cor(autos1[,2:12])
+donnes_centrees_reduites <- cbind(nvellePuissance, nvelleHaut,
+                                  nvelleLarg, nvelleLong, nvelleCylindre, nvelleCoupleMaxi,
+                                  nvelleCoffre, nvelleRese, nvellePoids, nvelleVite, nvelleCons)
 
-donnes_centres_reduites <- c(nvellePuissance,nvelleHaut,
-           nvelleLarg,nvelleLong,nvelleCylindre,nvelleCoupleMaxi,
-            nvelleCoffre,nvelleRese,nvellePoids,nvelleVite,nvelleCons
-           )
+matrice_de_correlation <- cor(donnes_centrees_reduites)
+valeurs_propres <- eigen(matrice_de_correlation)
 
-donnes_centres_reduites
+val_prop <- valeurs_propres$values
+valeurs_propres$vectors
